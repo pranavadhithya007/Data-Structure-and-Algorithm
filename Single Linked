@@ -1,0 +1,189 @@
+class SLL
+{   Node head ;
+	class Node
+	{
+		int data;
+		Node next;
+		Node(int data)
+		{
+			this.data=data;
+			next=null;
+		}
+	}
+	public void insertAtEnd(int data)
+	{
+		Node newNode =new Node(data);
+		if(head==null)
+		{
+			head=newNode;
+		}
+		else {
+			Node temp=head;
+			while(temp.next!=null)
+			{
+				temp=temp.next;
+			}
+			temp.next=newNode;
+			
+		}
+	}
+	public void insertAtBeginning(int data)
+	{
+		Node newNode =new Node(data);
+		if(head==null)
+		{
+			head=newNode;
+		}
+		else {
+			newNode.next=head;
+			head=newNode;
+		}
+	}
+	public void display()
+	{
+		Node temp = head;
+		while(temp!=null)
+		{
+			System.out.print(temp.data+" ");
+			temp=temp.next;
+		}
+		System.out.println();
+	}
+	public void insertAtMiddle(int data, int pos)
+	{
+		Node newNode =new Node(data);
+		if(head==null)
+		{
+			head=newNode;
+			return;
+		}
+		int len=0;
+		Node temp = head;
+		while(temp!=null)
+		{   len++;
+			temp=temp.next;
+			
+		}
+		if(len<pos)
+			{System.out.println("can not insert so insert at beginning"
+					+ " ");
+			insertAtEnd(data);
+			display();
+			 
+			}
+		else {
+			temp=head;
+			pos-=2;
+			while(pos>0)
+			{
+				pos--;
+				temp=temp.next;
+			}
+		   newNode.next=temp.next;
+		   temp.next=newNode;
+		}
+	}
+	public void deleteAtEnd()
+	{
+		if(head==null)
+		{
+			System.out.println("head is null so we cannot delete");
+		}
+		else if(head.next==null){
+			head=null;
+			
+		}
+		else {
+			Node temp = head;
+			while(temp.next.next!=null)
+			{
+				temp=temp.next;
+			}
+			temp.next=null;
+			
+		}
+	}
+	public void deleteAtBegin()
+	{
+		if(head==null)
+		{
+			System.out.println("head is null cannot delete");
+		}
+		else{
+		head=head.next;
+			
+		}
+	}
+	public void deleteAtMiddle(int pos)
+	{
+		if(head==null)
+		{
+			System.out.println("head is null, cannot delete");
+		}
+		else{
+			Node temp =head;
+			pos-=2;
+			while(pos>0)
+			{
+				pos--;
+				temp=temp.next;
+			}
+		  temp.next=temp.next.next;
+		}
+	}
+	public void search(int ele)
+	{
+		if(head == null)
+		{
+			System.out.println("head is null, cannot search data");
+		}
+		else {
+			Node temp = head;
+			while(temp!=null)
+			{
+				if(temp.data == ele )
+				{
+					System.out.println("found");
+					break;
+				}
+				temp=temp.next;
+			}
+			if(temp==null)
+				System.out.println("Not found");
+			
+		}
+	}
+}
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		SLL list1=new SLL();
+		list1.insertAtEnd(6);
+		list1.insertAtEnd(8);
+		
+		list1.display();
+		list1.insertAtEnd(8);
+		list1.insertAtEnd(1);
+		list1.insertAtEnd(7);
+		list1.display();
+		list1.insertAtBeginning(0);
+		list1.display();
+        list1.insertAtMiddle(5, 5);
+        list1.insertAtMiddle(4,3);
+        list1.display();
+        list1.insertAtMiddle(7, 2);
+        list1.display();
+        list1.deleteAtEnd();
+        list1.display();
+        list1.deleteAtBegin();
+        list1.display();
+        list1.deleteAtMiddle(2);
+        list1.display();
+        list1.search(7);
+        list1.search(9);
+        
+        }
+
+}
