@@ -1,0 +1,108 @@
+class node
+{
+    int data;
+    node next;
+    
+    node(int data)
+    {
+        this.data=data;
+        this.next=null;
+    }
+}
+class stack
+{
+    node top;
+    int count;
+    public void push(int data)
+    {
+        node newnode=new node(data);
+        newnode.next=top;
+        top=newnode;
+        count++;
+        System.out.println(data+"push added data");
+    }
+
+public int pop()
+{
+    if(isEmpty())
+    {
+        System.out.println("Stack under flow");
+        return-1;
+    }
+    int popped=top.data;
+    top=top.next;
+    count--;
+    System.out.println(popped+" Popped data from stack");
+    return popped;
+}
+public int peak()
+{
+    if(isEmpty())
+    {
+        System.out.println("Stack is empty");
+        return-1;
+    }
+    return top.data;
+}
+public boolean isEmpty()
+{
+    return top==null;
+}
+public int size()
+{
+    return count;
+}
+public void clear()
+{
+    top=null;
+    count=0;
+    System.out.println("Stack is cleared");
+}
+public boolean contains(int value)
+{
+    node temp=top;
+    while(temp!=null)
+    {
+        if(temp.data==value)
+        return true;
+        temp=temp.next;
+    }
+    return false;
+    }
+    public void display()
+    {
+        if(isEmpty())
+        {
+            System.out.println("Stack is empty");
+            return;
+        }
+        node temp=top;
+        System.out.println("Stack top to bottom");
+        while(temp!=null)
+        {
+            System.out.println(temp.data+"");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+}
+public class Main
+{
+    public static void main(String[]args)
+    {
+        stack stack=new stack();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        stack.push(50);
+        stack.display();
+        System.out.println("Top elements in:"+stack.peak());
+        System.out.println("stack size:"+stack.size());
+        stack.pop();
+        stack.display();
+        System.out.println("contains 20"+stack.contains(20));
+        System.out.println("contains 40"+stack.contains(40));
+        stack.clear();
+        stack.display();
+    }
+}
