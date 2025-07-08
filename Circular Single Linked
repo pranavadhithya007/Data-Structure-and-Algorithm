@@ -1,0 +1,169 @@
+//circlar singly linked list
+class Nivitha {
+    Node head;
+
+    class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
+    }
+
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            head.next = head;
+        } else {
+            Node temp = head;
+            while (temp.next != head) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+            newNode.next = head;
+        }
+    }
+
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            head.next = head;
+        } else {
+            Node temp = head;
+            while (temp.next != head) {
+                temp = temp.next;
+            }
+            newNode.next = head;
+            temp.next = newNode;
+            head = newNode;
+        }
+    }
+
+    public void insertAtMiddle(int data, int pos) {
+        if (head == null || pos <= 1) {
+            insertAtBeginning(data);
+            return;
+        }
+        Node newNode = new Node(data);
+        Node temp = head;
+        for (int i = 1; i < pos - 1 && temp.next != head; i++) {
+            temp = temp.next;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+
+    public void deleteAtEnd() {
+        if (head == null) return;
+
+        if (head.next == head) {
+            head = null;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next.next != head) {
+            temp = temp.next;
+        }
+        temp.next = head;
+    }
+
+    public void deleteAtBeginning() {
+        if (head == null) return;
+
+        if (head.next == head) {
+            head = null;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != head) {
+            temp = temp.next;
+        }
+        temp.next = head.next;
+        head = head.next;
+    }
+
+    public void deleteAtMiddle(int pos) {
+        if (head == null || pos <= 1) {
+            deleteAtBeginning();
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 1; i < pos - 1 && temp.next != head; i++) {
+            temp = temp.next;
+        }
+
+        if (temp.next == head) {
+            deleteAtEnd();
+        } else {
+            temp.next = temp.next.next;
+        }
+    }
+
+    public void search(int data) {
+        if (head == null) {
+            System.out.println("Not found");
+            return;
+        }
+        Node temp = head;
+        do {
+            if (temp.data == data) {
+                System.out.println("Found");
+                return;
+            }
+            temp = temp.next;
+        } while (temp != head);
+
+        System.out.println("Not found");
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != head);
+        System.out.println();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Nivitha list = new Nivitha();
+
+        list.insertAtEnd(7);
+        list.display();
+
+        list.insertAtEnd(9);
+        list.insertAtEnd(0);
+        list.insertAtEnd(2);
+        list.display();
+
+        list.insertAtBeginning(1);
+        list.display();
+
+        list.insertAtMiddle(12, 12);
+        list.display();
+
+        list.deleteAtBeginning();
+        list.display();
+
+        list.deleteAtEnd();
+        list.display();
+
+        list.deleteAtMiddle(20);
+        list.display();
+
+        list.search(89);
+        list.search(1000);
+    }
+}
