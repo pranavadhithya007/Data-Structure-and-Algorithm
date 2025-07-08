@@ -1,0 +1,138 @@
+class Pranav{
+    class Node{
+        int data;
+        Node next;
+        Node prev;
+        
+        Node(int data){
+            this.data=data;
+            next=null;
+            prev=null;
+        }
+    }
+    Node head;
+    
+    //Insert at End
+    public void insertAtEnd(int data)
+    {
+        Node newNode=new Node(data);
+        if(head == null)
+        {
+            head=newNode;
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=newNode;
+        newNode.prev=temp;
+    }
+    //Insert At Beginning
+    public void insertAtBeginning(int data){
+        Node newNode=new Node(data);
+        if(head == null){
+            head=newNode;
+            return;
+        }
+        newNode.next=head;
+        head=newNode;
+    }
+    //Insert at Middle
+    public void insertAtMiddle(int data,int pos){
+        if(pos==0){
+            insertAtBeginning(data);
+            return;
+        }
+        Node newNode=new Node(data);
+        Node temp=head;
+        for(int i=0;i<pos-1 && temp!=null;i++){
+            temp=temp.next;
+        }
+        if(temp==null||temp.next==null){
+            insertAtEnd(data);
+            return;
+        }
+        newNode.next=temp.next;
+        newNode.prev=temp;
+        temp.next.prev=newNode;
+        temp.next=newNode;
+    }
+    //deleteAtBeginning
+    public void deleteAtBeginning(int data)
+    {
+        if(head == null){
+            System.out.println("head is null cannot delete");
+        }
+        else{
+            head=head.next;
+            head.prev=null;
+        }
+    }
+    //deleteAtMiddle
+    public void deleteAtMiddle(int pos){
+        if(head==null){
+            System.out.println("head is null, cannot delete");
+        }
+        else{
+            Node temp=head;
+            pos-=2;
+            while(pos>0)
+            {
+                pos--;
+                temp=temp.next;
+            }
+            temp.next=temp.next.next;
+        }
+    }
+    //deleteAtEnd
+    public void deleteAtEnd(int data)
+    {
+        if(head==null){
+            System.out.println("head is null so we cannot delete");
+        }
+        else if(head.next==null)
+        {
+            head=null;
+        }
+        else{
+            Node temp=head;
+            while(temp.next.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=null;
+        }
+    }
+
+public void display()
+{
+    Node temp=head;
+    while(temp!=null){
+        System.out.print(temp.data+" ");
+        temp=temp.next;
+    }
+    System.out.println();
+}
+}
+
+public class Main{
+    public static void main(String[]args){
+        Pranav list1=new Pranav();
+        list1.insertAtEnd(5);
+        list1.insertAtBeginning(3);
+        list1.display();
+        list1.insertAtBeginning(4);
+        list1.insertAtEnd(4);
+        list1.display();
+        list1.insertAtMiddle(2,3);
+        list1.display();
+        list1.deleteAtBeginning(4);
+        list1.display();
+        list1.deleteAtEnd(4);
+        list1.display();
+        list1.deleteAtMiddle(2);
+        list1.display();
+    }
+}
