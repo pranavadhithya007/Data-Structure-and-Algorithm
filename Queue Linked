@@ -1,0 +1,86 @@
+class Pranav 
+{
+    class Node 
+    {
+        int data;
+        Node next;
+    }
+    Node front = null, rear = null;
+    // Enqueue operation
+    void enqueue(int val) 
+    {
+        Node newNode = new Node();
+        newNode.data = val;
+        newNode.next = null;
+        if (rear == null) 
+        {
+            front = rear = newNode;
+        } else 
+        {
+            rear.next = newNode;
+            rear = newNode;
+        }
+    }
+    // Dequeue operation
+    void dequeue() 
+    {
+        if (front == null) 
+        {
+            System.out.println("Queue is empty");
+        } 
+        else
+        {
+            System.out.println("Dequeued: " + front.data);
+            front = front.next;
+            if (front == null) 
+            {
+                rear = null;
+            }
+        }
+    }
+    // Peek front
+    void peek() {
+        if (front == null) 
+        {
+            System.out.println("The queue is empty");
+        }
+        else 
+        {
+            System.out.println("Front: " + front.data);
+        }
+    }
+    // Display queue
+    void display() 
+    {
+        if (front == null) 
+        {
+            System.out.println("The queue is empty");
+        } 
+        else 
+        {
+            Node temp = front;
+            System.out.print("Queue: ");
+            while (temp != null) 
+            {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+            System.out.println();
+        }
+    }
+}
+// Main class
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Pranav queue = new Pranav();
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.display();
+        queue.peek();
+        queue.dequeue();
+        queue.display();
+    }
+}
