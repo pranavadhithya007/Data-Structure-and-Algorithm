@@ -1,0 +1,79 @@
+/*import java.util.Scanner;
+class Main
+{
+    public static void main(String[]args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int row=sc.nextInt();
+        for(int i=0;i<row;i++)
+        {
+            int number=1;
+            for(int j=0;j<=i;j++)
+            {
+                System.out.print(number+" ");
+                number=number*(i-j)/(j+i);
+            }
+            System.out.println();
+        }
+    }
+}*/
+class Node
+{
+    int data;
+    Node left,right;
+    Node(int value)
+    {
+        data=value;
+        left=right=null;
+    }
+}
+class BinaryTree
+{
+    Node root;
+    void inorder(Node node)
+    {
+        if(node!=null)
+        {
+            inorder(node.left);
+            System.out.println(node.data+" ");
+            inorder(node.right);
+        }
+    }
+    void preorder(Node node)
+    {
+        if(node!=null)
+        {
+            preorder(node.left);
+            preorder(node.right);
+            System.out.println(node.data+" ");
+            inorder(node.right);
+        }
+    }
+    void postorder(Node node)
+    {
+        if(node!=null)
+        {
+            postorder(node.left);
+            postorder(node.right);
+            System.out.println(node.data+" ");
+        }
+    }
+}
+public class Main
+{
+    public static void main(String[]args)
+    {
+        BinaryTree tree=new BinaryTree();
+        tree.root=new Node(1);
+        tree.root.left=new Node(2);
+        tree.root.right=new Node(3);
+        tree.root.left.left=new Node(4);
+        tree.root.left.right=new Node(5);
+        System.out.println("Inorder traversal");
+        tree.inorder(tree.root);
+        System.out.println("\n preorder traversal");
+        tree.preorder(tree.root);
+        System.out.println("\n postorder traversal");
+        tree.postorder(tree.root);
+    }
+}
